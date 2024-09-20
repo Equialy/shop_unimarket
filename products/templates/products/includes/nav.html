@@ -1,0 +1,6 @@
+
+
+{% for cat in category %}
+        <a class="nav-link" href="{% url 'categories' cat.slug %}">{{ cat.name }}</a>
+
+{% endfor %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+
+<div class="container mt-5 ">
+
+    {% for cat in category %}
+        <a class="nav-link {% if cat.slug == current_category.slug %}active{% endif %}"
+           href="{% url 'categories' cat.slug %}">{{ cat.name }}</a>
+
+    {% endfor %}
+    <br>
+<!--    Выбор одежды-->
+<div class="product-container">
+
+    {% for i in products %}
+    <div class="product-item">
+        {% if i.image %}
+        <img class="image_carts" src="{{i.image.url}}" alt="">
+        {% endif %}
+        <table align="center">
+<!--            <a  href="{% url 'cart_item' i.slug %}">-->
+<!--                <img class="image_carts" src="{% static 'products/images/default_image.jpg' %}" alt=""></a>-->
+            <td><a class="nav-link" href="{% url 'cart_item' i.slug %}">{{ i.title }}</a></td>
+            <p></p>
+
+        </table>
+        Цена: {{ i.price }}
+    </div>
+    {% endfor %}
+</div>
+
+<!--Карточка товара-->
+    {% for cart in carts %}
+    <div>
+        <p>{{ cart.title }}</p>
+        <p>{{ cart.description }}</p>
+        <p>{{ cart.price }}</p>
+        <p><button type="submit" formaction="#" class="button_add_to">Добавить в корзину</button></p>
+    </div>
+
+    {% endfor %}
+
+</div>
+{% endblock %}
