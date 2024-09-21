@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound
@@ -33,7 +34,7 @@ def categories(request,category_slug):
 
     return render(request, 'products/products.html', data)
 
-
+@login_required
 def cart_item(request, slug_cart):
     """Описание карточки товара"""
     data = {

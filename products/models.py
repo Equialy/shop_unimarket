@@ -9,15 +9,15 @@ class Products(models.Model):
     title = models.CharField(max_length=256, unique=True, verbose_name='Название')
     description = models.TextField(null=True, blank=True, verbose_name='Описание')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
-    slug = models.SlugField(max_length=255,null=True,default='slug_1', unique=True,  db_index=True)
+    slug = models.SlugField(max_length=255,  default='', unique=True, db_index=True)
     count = models.PositiveIntegerField(default=0, verbose_name='Колличество')
     image = models.ImageField(upload_to='product_images', blank=True, null=True, verbose_name='Изображение')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время добавления')
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True, related_name='product',
                                  verbose_name='Категория')
 
-    # def __str__(self):
-    #     return f'Продукт: {self.title} | Категория: {self.category.name}'
+    def __str__(self):
+        return f'Продукт: {self.title} | Категория: {self.category.name}'
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -30,8 +30,6 @@ class Products(models.Model):
         ordering = ['-time_create']
 
 
-
-
 class Category(models.Model):
     name = models.CharField(max_length=256, unique=True, verbose_name='Название категории')
     description = models.TextField(null=True, blank=True, verbose_name='Описание')
@@ -40,3 +38,13 @@ class Category(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+        ordering = ['name']
+
+
+class BasketUser(models.Model):
+    product = models.ForeignKey(to=Products, on_delete=models.CASCADE)
+    quantity = models.PositiveSmallIntegerField(default=0)
+    create_time = models.DateTimeField(auto_now_add=True)

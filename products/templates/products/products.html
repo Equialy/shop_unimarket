@@ -18,7 +18,7 @@
     {% for i in products %}
     <div class="product-item">
         {% if i.image %}
-        <img class="image_carts" src="{{i.image.url}}" alt="">
+        <a  href="{% url 'cart_item' i.slug %}"><img class="image_carts" src="{{i.image.url}}" alt=""></a>
         {% endif %}
         <table align="center">
 <!--            <a  href="{% url 'cart_item' i.slug %}">-->

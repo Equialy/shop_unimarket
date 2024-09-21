@@ -6,8 +6,8 @@ from products.models import Products, Category
 # Register your models here.
 @admin.register(Products)
 class ProductAdmin(admin.ModelAdmin):
-    fields = ['title', 'description', 'time_create','slug', 'image', 'count', 'category']
-    list_display = ['title', 'time_create','slug', 'image', 'count', 'category']
+    fields = ['title', 'description', 'time_create', 'image', 'count', 'category']
+    list_display = ['title', 'time_create', 'image', 'count', 'category']
     list_display_links = ('title',)
     readonly_fields = ('time_create',)
     search_fields = ('title', 'time_create',)
@@ -19,10 +19,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 
-# @admin.register(Products)
-# class CategoryAdmin(admin.ModelAdmin):
-#     readonly_fields = ['title', 'price', 'count', 'time_create']
-#     fields = ['title', 'price', 'count', 'time_create']
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']

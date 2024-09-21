@@ -1,0 +1,38 @@
+[
+{
+  "model": "products.category",
+  "pk": 1,
+  "fields": {
+    "name": "Обувь",
+    "description": "",
+    "slug": "obuv"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 2,
+  "fields": {
+    "name": "Верхняя одежда",
+    "description": "",
+    "slug": "verhnya_odezhda"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 3,
+  "fields": {
+    "name": "Футболки",
+    "description": "",
+    "slug": "futbolky"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 4,
+  "fields": {
+    "name": "Аксессуары",
+    "description": "",
+    "slug": "acsessuar"
+  }
+}
+]

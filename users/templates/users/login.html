@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!--container mt-5-->
+<div class="form_login_div">
+    <div class="login_container">
+        <div class="login_form">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <p>{{ title }}</p>
+                <div>{{ form.non_field_errors }}</div>
+                {% for line in form %}
+                <p><label for="{{ f.id_for_label }}">{{ line.label  }}</label>{{ line }}</p>
+                    <div>{{ line.errors }}</div>
+                {% endfor %}
+                <p><button type="submit">Войти</button></p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
