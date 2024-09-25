@@ -43,7 +43,7 @@ class SignUpForm(UserCreationForm):
         attrs={'class': 'form-input', 'placeholder': 'Введите пароль'}))
     password2 = forms.CharField(label='Повторите пароль', widget=forms.PasswordInput(
         attrs={'class': 'form-input', 'placeholder': 'Введите пароль'}))
-    gender = forms.ChoiceField(choices=User.GenderChoice.choices, widget=forms.RadioSelect, required=True)
+    gender = forms.ChoiceField(choices=User.GenderChoice.choices, widget=forms.RadioSelect,label='Пол', required=True)
 
     class Meta:
         model = get_user_model()

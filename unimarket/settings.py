@@ -126,8 +126,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'products:index'
+LOGOUT_REDIRECT_URL = 'products:index'
 LOGIN_URL = 'users:login'
 
 

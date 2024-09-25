@@ -9,7 +9,10 @@ from products.models import Category, Products, BasketUser
 # Create your views here.
 
 def index(request):
-    return render(request, 'products/index.html')
+    data = {
+        'title': 'Unimarket'
+    }
+    return render(request, 'products/index.html', data)
 
 
 def products(request):
@@ -17,6 +20,7 @@ def products(request):
     data = {
         'products': Products.objects.all(),
         'category': Category.objects.all(),
+        'title': 'Товары'
     }
 
     return render(request, 'products/products.html', data)
@@ -29,7 +33,8 @@ def categories(request,category_slug):
     data = {
         'category': Category.objects.all(),
         'current_category': current_category,
-        'products': Products.objects.filter(category = category)
+        'products': Products.objects.filter(category = category),
+        'title': 'Товары'
     }
 
     return render(request, 'products/products.html', data)
@@ -37,12 +42,15 @@ def categories(request,category_slug):
 @login_required
 def cart_item(request, slug_cart):
     """Описание карточки товара"""
+
     data = {
         'category': Category.objects.all(),
-        'carts': Products.objects.filter(slug=slug_cart)
+        'carts': Products.objects.filter(slug=slug_cart),
+        'title':  'Товары'
     }
     return render(request, 'products/products.html', data)
 
+@login_required
 def basket_add(request, product_id):
     product = Products.objects.get(id=product_id)
     basket = BasketUser.objects.filter(user=request.user, product=product)
@@ -52,4 +60,12 @@ def basket_add(request, product_id):
         basket = basket.first()
         basket.quantity += 1
         basket.save()
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+
+@login_required
+def basket_remove(request, basket_id):
+    basket = BasketUser.objects.get(id=basket_id)
+    basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
