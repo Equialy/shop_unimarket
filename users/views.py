@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
+from products.models import Products, BasketUser
 from users.forms import LoginForm, SignUpForm, ProfileForm
 
 
@@ -34,10 +35,14 @@ class Profile( LoginRequiredMixin,UpdateView):
     form_class = ProfileForm
     template_name = 'users/profile_user.html'
 
+
     def get_success_url(self):
         return reverse_lazy('users:profile_user')
     def get_object(self, queryset=None):
         return self.request.user
+
+
+
 
 # def sign_up(request):
 #     if request.method == "POST":

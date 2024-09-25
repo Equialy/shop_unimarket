@@ -8,7 +8,7 @@
 
     {% for cat in category %}
         <a class="nav-link {% if cat.slug == current_category.slug %}active{% endif %}"
-           href="{% url 'categories' cat.slug %}">{{ cat.name }}</a>
+           href="{% url 'products:categories' cat.slug %}">{{ cat.name }}</a>
 
     {% endfor %}
     <br>
@@ -18,12 +18,11 @@
     {% for i in products %}
     <div class="product-item">
         {% if i.image %}
-        <a  href="{% url 'cart_item' i.slug %}"><img class="image_carts" src="{{i.image.url}}" alt=""></a>
+        <a  href="{% url 'products:cart_item' i.slug %}"><img class="image_carts" src="{{i.image.url}}" alt=""></a>
         {% endif %}
         <table align="center">
-<!--            <a  href="{% url 'cart_item' i.slug %}">-->
-<!--                <img class="image_carts" src="{% static 'products/images/default_image.jpg' %}" alt=""></a>-->
-            <td><a class="nav-link" href="{% url 'cart_item' i.slug %}">{{ i.title }}</a></td>
+
+            <td><a class="nav-link" href="{% url 'products:cart_item' i.slug %}">{{ i.title }}</a></td>
             <p></p>
 
         </table>
@@ -38,7 +37,12 @@
         <p>{{ cart.title }}</p>
         <p>{{ cart.description }}</p>
         <p>{{ cart.price }}</p>
-        <p><button type="submit" formaction="#" class="button_add_to">Добавить в корзину</button></p>
+        <p>
+        <a href="{% url 'products:basket_add' cart.id %}">
+            <button type="submit" formaction="#" class="button_add_to">Добавить в корзину</button>
+        </a>
+        </p>
+
     </div>
 
     {% endfor %}

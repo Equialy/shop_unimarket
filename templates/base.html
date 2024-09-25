@@ -20,11 +20,11 @@
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
 
-            <a href="{% url 'index' %}"><img class="background" src="{% static 'products/images/logo.jpg' %}"  width="auto" alt=""></a>
+            <a href="{% url 'products:index' %}"><img class="background" src="{% static 'products/images/logo.jpg' %}"  width="auto" alt=""></a>
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'products' %}">Каталог <i class="fas fa-shopping-bag"></i> </a>
+                    <a class="nav-link" href="{% url 'products:products' %}">Каталог <i class="fas fa-shopping-bag"></i> </a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">

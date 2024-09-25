@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 
-from products.models import Category, Products
+from products.models import Category, Products, BasketUser
 
 
 # Create your views here.
@@ -42,3 +42,14 @@ def cart_item(request, slug_cart):
         'carts': Products.objects.filter(slug=slug_cart)
     }
     return render(request, 'products/products.html', data)
+
+def basket_add(request, product_id):
+    product = Products.objects.get(id=product_id)
+    basket = BasketUser.objects.filter(user=request.user, product=product)
+    if not basket.exists():
+        BasketUser.objects.create(user=request.user, product=product,quantity=1)
+    else:
+        basket = basket.first()
+        basket.quantity += 1
+        basket.save()
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])

@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
+from users.models import User
+
 
 # Create your models here.
 
@@ -46,5 +48,7 @@ class Category(models.Model):
 
 class BasketUser(models.Model):
     product = models.ForeignKey(to=Products, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField(default=0)
     create_time = models.DateTimeField(auto_now_add=True)
+
