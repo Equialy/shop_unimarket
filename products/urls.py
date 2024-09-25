@@ -1,7 +1,10 @@
 from django.contrib import admin
 from django.urls import path
+from django.views.decorators.cache import cache_page
+
 from . import views
 app_name = 'products'
+# Для кеширования отдельных страниц перед представлением прописать cache_page(30)(views.выбрать представление)
 urlpatterns = [
     path('', views.index, name='index'),
     path('products/', views.products, name='products'),
